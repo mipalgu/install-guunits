@@ -12,12 +12,24 @@ runs:
           path: guunits
 
     - name: Install guunits
+      if: ${{ runner.os == 'Windows' }}
       run: |
           cd guunits/guunits
           cmake -B .build
           cmake --build .build --config Release
           cmake --install .build
+      shell: pwsh
+
+    - name: Install guunits
+      if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
+      run: |
+          cd guunits/guunits
+          cmake -B .build
+          cmake --build .build --config Release
+          cmake --install .build
+      shell: bash
 
     - name: Add PKG_CONFIG_PATH
       if: ${{ runner.os == 'Windows' }}
       run: $env:PKG_CONFIG_PATH = "C:/Program Files (x86)/guunits/lib/pkgConfig" + $env:PKG_CONFIG_PATH
+      shell: pwsh
