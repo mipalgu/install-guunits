@@ -29,7 +29,10 @@ runs:
           cmake --install .build
       shell: bash
 
-    - name: Add PKG_CONFIG_PATH
+    - name: Add Environment Variables
       if: ${{ runner.os == 'Windows' }}
-      run: $env:PKG_CONFIG_PATH = "C:/Program Files (x86)/guunits/lib/pkgConfig" + $env:PKG_CONFIG_PATH
+      run: |
+        $env:PKG_CONFIG_PATH = "C:/Program Files (x86)/guunits/lib/pkgConfig;" + $env:PKG_CONFIG_PATH
+        $env:LIBRARY_PATH = "C:/Program Files (x86)/guunits/lib;" + $env:LIBRARY_PATH
+        $env:CPATH = "C:/Program Files (x86)/guunits/lib;" + $env:CPATH
       shell: pwsh
