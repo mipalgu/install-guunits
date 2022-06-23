@@ -35,4 +35,7 @@ runs:
         $env:PKG_CONFIG_PATH = "C:/Program Files (x86)/guunits/lib/pkgConfig;" + $env:PKG_CONFIG_PATH
         $env:LIBRARY_PATH = "C:/Program Files (x86)/guunits/lib;" + $env:LIBRARY_PATH
         $env:CPATH = "C:/Program Files (x86)/guunits/lib;" + $env:CPATH
+        echo "{PKG_CONFIG_PATH}={$env:PKG_CONFIG_PATH}" | Out-File -FilePath $env:GITHUB_ENV -Append
+        echo "{CPATH}={$env:CPATH}" | Out-File -FilePath $env:GITHUB_ENV -Append
+        echo "{LIBRARY_PATH}={$env:LIBRARY_PATH}" | Out-File -FilePath $env:GITHUB_ENV -Append
       shell: pwsh
