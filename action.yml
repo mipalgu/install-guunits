@@ -1,0 +1,23 @@
+name: Install guunits
+description: Installs guunits in standard paths on the system
+
+runs:
+  using: 'composite'
+
+  steps:
+    - name: Clone guunits
+      uses: actions/checkout@v2
+      with:
+          repository: mipalgu/guunits
+          path: guunits
+
+    - name: Install guunits
+      run: |
+          cd guunits/guunits
+          cmake -B .build
+          cmake --build .build --config Release
+          cmake --install .build
+
+    - name: Add PKG_CONFIG_PATH
+      if: ${{ runner.os == 'Windows' }}
+      run: $env:PKG_CONFIG_PATH = "C:/Program Files (x86)/guunits/lib/pkgConfig" + $env:PKG_CONFIG_PATH
