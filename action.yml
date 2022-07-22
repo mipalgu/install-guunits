@@ -25,7 +25,7 @@ runs:
       run: |
           cd guunits/guunits
           cmake -B .build
-          cmake --build .build --config Release --prefix /usr
+          cmake --build .build --config Release
           sudo cmake --install .build
       shell: bash
 
@@ -41,14 +41,14 @@ runs:
     - name: Add Environment Variables
       if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
       run: |
-        PKG_CONFIG_PATH="/usr/local/lib/pkgConfig:$PKG_CONFIG_PATH"
-        LIB="/usr/local/lib:$LIB"
-        LIBPATH="/usr/local/lib:$LIBPATH"
-        LIBRARY_PATH="/usr/local/lib:$LIBRARY_PATH"
-        LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
-        INCLUDE="/usr/local/include:$INCLUDE"
-        IFCPATH="/usr/local/include:$IFCPATH"
-        CPATH="/usr/local/include:$CPATH"
+        PKG_CONFIG_PATH = "/usr/local/lib/pkgConfig:$PKG_CONFIG_PATH"
+        LIB = "/usr/local/lib:$LIB"
+        LIBPATH = "/usr/local/lib:$LIBPATH"
+        LIBRARY_PATH = "/usr/local/lib:$LIBRARY_PATH"
+        LD_LIBRARY_PATH = "/usr/local/lib:$LD_LIBRARY_PATH"
+        INCLUDE = "/usr/local/include:$INCLUDE"
+        IFCPATH = "/usr/local/include:$IFCPATH"
+        CPATH = "/usr/local/include:$CPATH"
         echo "PKG_CONFIG_PATH=$PKG_CONFIG_PATH" >> $GITHUB_ENV
         echo "INCLUDE=$INCLUDE" >> $GITHUB_ENV
         echo "CPATH=$CPATH" >> $GITHUB_ENV
