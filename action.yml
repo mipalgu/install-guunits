@@ -39,6 +39,25 @@ runs:
       shell: bash
 
     - name: Add Environment Variables
+      if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
+      run: |
+        PKG_CONFIG_PATH = "/usr/local/lib/pkgConfig:$PKG_CONFIG_PATH"
+        LIB = "/usr/local/lib:$LIB"
+        LIBPATH = "/usr/local/lib:$LIBPATH"
+        LIBRARY_PATH = "/usr/local/lib:$LIBRARY_PATH"
+        INCLUDE = "/usr/local/include:$INCLUDE"
+        IFCPATH = "/usr/local/include:$IFCPATH"
+        CPATH = "/usr/local/include:$CPATH"
+        echo "PKG_CONFIG_PATH=$PKG_CONFIG_PATH" >> $GITHUB_ENV
+        echo "INCLUDE=$INCLUDE" >> $GITHUB_ENV
+        echo "CPATH=$CPATH" >> $GITHUB_ENV
+        echo "IFCPATH=$IFCPATH" >> $GITHUB_ENV
+        echo "LIB=$LIB" >> $GITHUB_ENV
+        echo "LIBPATH=$LIBPATH" >> $GITHUB_ENV
+        echo "LIBRARY_PATH=$LIBRARY_PATH" >> $GITHUB_ENV
+      shell: bash
+
+    - name: Add Environment Variables
       if: ${{ runner.os == 'Windows' }}
       run: |
         $env:PKG_CONFIG_PATH = "C:/Program Files (x86)/guunits/lib/pkgConfig;" + $env:PKG_CONFIG_PATH
